@@ -18,4 +18,6 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LAT
 RUN apk del --purge deps \
  && rm /var/cache/apk/*
 
+USER jenkins
+RUN helm init --client-only
 
