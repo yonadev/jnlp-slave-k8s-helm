@@ -28,7 +28,23 @@ Optional environment variables:
 * `JENKINS_SECRET`: agent secret, if not set as an argument
 * `JENKINS_AGENT_NAME`: agent name, if not set as an argument
 
-## Configuration specifics
+## Issues
+
+* Error from server (Forbidden): User "system:serviceaccount:somenamespace:default" cannot list pods in the namespace "default". (get pods)
+If you get this error, the container does not have enough rights (through [K8S](https://kubernetes.io/docs/admin/authorization/rbac/))
+
+The simple answer is to grant admin permissions to that role with something like this :
+`
+kubectl create clusterrolebinding --user system:serviceaccount:somenamespace:default kube-system-cluster-admin --clusterrole cluster-admin
+`
+
+You will have to change the user to match the user account that the container is running as.
+
+* Error: UPGRADE FAILED: incompatible versions client[v2.7.2] server[v2.6.1]
+
+Helm is installed in this container as Client mode only using the latest version of Helm at container build time.
+The server component (tiller) needs to be at a compatible version.   `kubectl exec` into the container, and run helm init --upgrade to upgrade the tiller component.
+
 
 ### Enabled JNLP protocols
 
