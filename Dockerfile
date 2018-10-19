@@ -15,7 +15,9 @@ RUN curl -L http://storage.googleapis.com/kubernetes-helm/${HELM_FILENAME} | tar
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
  && chmod +x /usr/local/bin/kubectl
 
-RUN apk del --purge deps \
+RUN apk del --purge deps
+
+RUN apk add --update mysql-client \
  && rm /var/cache/apk/*
 
 USER jenkins
