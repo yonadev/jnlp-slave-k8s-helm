@@ -3,7 +3,7 @@ MAINTAINER Kerkhoff Technologies Inc. <linuxsupport@kerkhofftech.ca>
 
 ENV HELM_VERSION v2.7.2
 ENV HELM_FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
-ENV KUBE_LATEST_VERSION="v1.8.4"
+ENV KUBE_LATEST_VERSION="v1.16.8"
 
 USER root
 WORKDIR /
